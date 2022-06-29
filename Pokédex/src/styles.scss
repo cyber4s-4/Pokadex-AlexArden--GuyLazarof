@@ -7,14 +7,18 @@ $text-color: white;
   padding: 0;
 }
 body{
-  background-color: aqua;
+  background-color: rgb(255, 255, 255);
   header{
-    padding-top: 5vh;  
+    padding-top: 3vh;     
    nav{
     display: flex; 
     justify-content: space-around;
     align-items: center; 
     div{
+      border: 1px solid black; 
+      padding: 1vh 2vh; 
+      border-radius: 8px;
+
       &:hover{ 
         cursor: pointer;
       }
@@ -29,17 +33,36 @@ body{
     div.search{
       width: 400px; 
       margin: 0 auto; 
+      position: relative;
       
       input{ 
-        width: 349px;       
+        width: 349px;    
+        height: 3vh;      
       }
       button{
         display: inline; 
+        position: absolute;  
+        height: 3vh; 
+        width: 35px;    
+        font-size: 24px; 
+        padding-top: -5px; 
+        span{
+          position: absolute; 
+          top: -5px;   
+          left: 7px;    
+          transform: rotateZ(320deg);    
+        }
         &:hover{
           cursor: pointer; 
         }
       }
     } 
+    div.container{
+      width: 800px;
+      height: 85vh;  
+      padding: 3vh; 
+      margin: 0 auto; 
+    }
   }
 
   footer{
