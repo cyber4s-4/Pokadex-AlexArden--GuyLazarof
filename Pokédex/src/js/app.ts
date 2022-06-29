@@ -1,5 +1,8 @@
 //https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10
 
+//TODO: make pokemons button render all pokemons.
+//TODO: when searching pokemon render only searched pokemon.
+
 import Pokemon from './Pokemon'
 
 let container = document.querySelector('.container') as HTMLDivElement
@@ -19,8 +22,6 @@ searchButton.addEventListener('click', () => {
   })
 }) 
 
-
-
 let url = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10';
 
 async function getPokemonList(url: string){ 
@@ -35,6 +36,12 @@ async function renderPokemon(url: string) {
   let pokemon = new Pokemon(container, data);
 }
 
-let test = getPokemonList(url); 
-test.then(value => console.log(value.results))    
+// let test = getPokemonList(url); 
+// test.then(value => console.log(value.results))    
 
+// let list = getPokemonList('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151');
+// list.then(value => {
+//   value.results.forEach((item: {url: string; name: string }) => {
+//     renderPokemon(item.url) 
+//   })
+// })    

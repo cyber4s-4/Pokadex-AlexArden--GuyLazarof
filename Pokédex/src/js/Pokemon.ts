@@ -7,17 +7,17 @@ export default class Pokemon {
     this.render(parent,pokemonData);
   }
   render(parent: HTMLDivElement, pokemonData: pokemon) {
-    let pokemonElement = document.createElement("div");
-    pokemonElement.innerHTML = `
-    <div class="pokemon">
+    let pokemonDiv = document.createElement('div')
+    pokemonDiv.classList.add('pokemon'); 
+    pokemonDiv.innerHTML = `
      <img src="${pokemonData.sprites.front_default}">
      <div class="name">${pokemonData.name}</div>
      <div class="heigth">Height: ${pokemonData.height}</div>
      <div class="weigth">Weigth: ${pokemonData.weight}</div>
      <div class="type">${pokemonData.types[0].type.name}</div>
-    </div>
+    
     `;  
-    parent.appendChild(pokemonElement); 
+    parent.appendChild(pokemonDiv);
   }
 }
 
