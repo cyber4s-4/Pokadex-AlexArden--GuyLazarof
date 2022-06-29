@@ -6,3 +6,43 @@ $text-color: white;
   margin: 0;
   padding: 0;
 }
+body{
+  background-color: aqua;
+  header{
+    padding-top: 5vh;  
+   nav{
+    display: flex; 
+    justify-content: space-around;
+    align-items: center; 
+    div{
+      &:hover{ 
+        cursor: pointer;
+      }
+    }
+   }
+    height: 10vh;
+  }
+
+  main{
+    margin:  0 auto;  
+    height: 88vh;  
+    div.search{
+      width: 400px; 
+      margin: 0 auto; 
+      
+      input{ 
+        width: 349px;       
+      }
+      button{
+        display: inline; 
+        &:hover{
+          cursor: pointer; 
+        }
+      }
+    } 
+  }
+
+  footer{
+    text-align: center;
+  }
+}
