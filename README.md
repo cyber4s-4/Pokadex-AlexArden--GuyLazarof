@@ -1,2 +1,2 @@
-# Pokadex-AlexArden--GuyLazarof
+# Pokédex-AlexArden--GuyLazarof
 the best pokadex
