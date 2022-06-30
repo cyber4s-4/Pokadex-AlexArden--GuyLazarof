@@ -6,74 +6,81 @@ $text-color: white;
   margin: 0;
   padding: 0;
 }
-body{
+body {
   background-color: rgb(255, 255, 255);
-  header{
-    padding-top: 3vh;     
-   nav{ 
-    width: 75vw;  
-    margin: 0  auto; 
-    display: flex; 
-    justify-content: space-around;
-    align-items: center; 
-    div{
-      border: 1px solid black; 
-      padding: 1vh 2vh; 
-      border-radius: 8px;
+  header {
+    padding-top: 3vh;
+    nav {
+      width: 75vw;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      div {
+        border: 1px solid black;
+        padding: 1vh 2vh;
+        border-radius: 8px;
 
-      &:hover{ 
-        cursor: pointer;
-        background-color: rgb(196, 196, 196); 
+        &:hover {
+          cursor: pointer;
+          background-color: rgb(196, 196, 196);
+        }
       }
     }
-   }
     height: 10vh;
   }
 
-  main{
-    margin:  0 auto;  
-    height: 88vh;  
-    div.search{
-      width: 400px; 
-      margin: 0 auto; 
+  main {
+    margin: 0 auto;
+    height: 88vh;
+    div.search {
+      width: 400px;
+      margin: 0 auto;
       position: relative;
-      
-      input{ 
-        width: 349px;    
-        height: 3vh;       
-      }
-      button{
-        display: inline;    
-        position: absolute;  
+
+      input {
+        width: 349px;
         height: 3vh;
-        top: 3px; 
-        width: 35px;    
-        font-size: 24px; 
-        padding-top: -5px; 
-        span{
-          position: absolute; 
-          top: -5px;   
-          left: 7px;    
-          transform: rotateZ(320deg);    
+      }
+      button {
+        display: inline;
+        position: absolute;
+        height: 3vh;
+        top: 3px;
+        width: 35px;
+        font-size: 24px;
+        padding-top: -5px;
+        span {
+          position: absolute;
+          top: -5px;
+          left: 7px;
+          transform: rotateZ(320deg);
         }
-        &:hover{
-          cursor: pointer; 
+        &:hover {
+          cursor: pointer;
         }
       }
-    } 
-    div.container{
-      width: 800px;
-      min-height: 75vh;  
-      height: fit-content;  
-      padding: 3vh; 
-      margin: 0 auto;   
+    }
+    div.container {
+      width: fit-content;
+      min-height: 75vh;
+      height: fit-content;
+      padding: 3vh;
+      margin: 0 auto;
       display: flex;
-      flex-wrap: wrap; 
-      justify-content: space-between; 
-      .pokemon{
-        width: 200px; 
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .pokemon {
+        width: 200px;
         height: 200px;
         margin: 10px;
+      }
+      .notFound {
+        display: flex;
+        background-color: aqua;
+        justify-content: center;
+        align-items: center;
+        height: 15px;
       }
     }
   }
