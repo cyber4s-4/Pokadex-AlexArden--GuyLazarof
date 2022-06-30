@@ -1,11 +1,13 @@
 $font-famaly: Helvetica, sans-serif;
 $primary-color: #333;
 $text-color: white;
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
 body {
   background-color: rgb(255, 255, 255);
   header {
@@ -77,23 +79,40 @@ body {
         }
       }
     }
-    div.container {
-      width: fit-content;
+    div.container {  
+      min-width: fit-content;  
       min-height: 75vh;
       height: fit-content;
-      padding: 3vh;
-      margin: 0 auto;
+      padding: 1vh; 
+      margin: 10px auto;    
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      .pokemon {
-        width: 200px;
-        height: 200px;
+      width: 200px;  
+     .pokemon {
+        width: 150px;
+        height: 185px;    
         margin: 10px;
+        text-align: center; 
+        border: 2px solid rgb(143, 143, 143);
+        background-color: rgb(222, 222, 222);
+        border-radius: 4px; 
+        &:hover{
+          animation: bounce 1s linear;
+          cursor: url(img/cursor.png), auto; 
+        }
+         
+        .name::first-letter{
+         text-transform: uppercase; 
+         font-weight: bold;   
+        }
+        .type::first-letter{ 
+          text-transform: uppercase;
+        }
       }
       .notFound {
         display: flex;
-        background-color: aqua;
+        background-color: aqua;  
         justify-content: center;
         align-items: center;
         height: 15px;
@@ -101,3 +120,12 @@ body {
     }
   }
 }
+
+
+// Animations
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+  40% {transform: translateY(-20px);}  
+  60% {transform: translateY(-10px);} 
+} 
