@@ -77,10 +77,15 @@ body {
       }
       .notFound {
         display: flex;
-        background-color: aqua;
         justify-content: center;
         align-items: center;
-        height: 15px;
+        height: auto;
+        font-size: 30px;
+        color: rgb(157, 7, 45);
+        .notFoundImg {
+          height: 40px;
+          margin: 20px;
+        }
       }
     }
   }

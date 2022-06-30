@@ -28,8 +28,14 @@ searchButton.addEventListener("click", () => {
       container.innerHTML = "";
       let notExistsPokemon = document.createElement("div");
       notExistsPokemon.className = "notFound";
-      notExistsPokemon.innerHTML = `<u>${input.value}</u> &nbsp is not a pokemon`;
+      notExistsPokemon.innerHTML = `_<u>${input.value}</u>_ &nbsp is not a pokemon`;
+      let img = document.createElement("img");
+
+      img.src = "img/research.png";
+      img.className = "notFoundImg";
+      notExistsPokemon.appendChild(img);
       container.appendChild(notExistsPokemon);
+
       input.value = "";
     }
   });
