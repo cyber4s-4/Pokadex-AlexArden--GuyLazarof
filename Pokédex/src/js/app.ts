@@ -63,3 +63,7 @@ allPokemons.addEventListener("click", () => {
     });
   });
 });
+let homeButton = document.querySelector(".homeButton") as HTMLDivElement;
+homeButton.addEventListener("click", () => {
+  container.innerHTML = "";
+});
