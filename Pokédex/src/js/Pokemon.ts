@@ -15,7 +15,6 @@ export default class Pokemon {
      <div class="heigth">Height: ${pokemonData.height}</div>
      <div class="weigth">Weigth: ${pokemonData.weight}</div>
      <div class="type">${pokemonData.types[0].type.name}</div>
-    
     `;  
     parent.appendChild(pokemonDiv);
   }
