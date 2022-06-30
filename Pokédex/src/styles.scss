@@ -14,13 +14,13 @@ body {
       width: 75vw;
       margin: 0 auto;
       display: flex;
-      justify-content: space-around;
+      justify-content: center; 
       align-items: center;
       div {
         border: 1px solid black;
         padding: 1vh 2vh;
-        border-radius: 8px;
-
+        border-radius: 8px; 
+        margin-right: 20px; 
         &:hover {
           cursor: pointer;
           background-color: rgb(196, 196, 196);
@@ -35,21 +35,33 @@ body {
     height: 88vh;
     div.search {
       width: 400px;
+      height: 3vh;  
       margin: 0 auto;
       position: relative;
 
-      input {
+      input{ 
         width: 349px;
         height: 3vh;
+        &:focus{
+          outline: none;  
+          border: 2px solid lime;
+          box-shadow: 0px 0px 0px 2px lime;  
+          border-radius: 2px; 
+          box-sizing: border-box; 
+          
+        }
       }
       button {
         display: inline;
         position: absolute;
         height: 3vh;
-        top: 3px;
-        width: 35px;
+        top: 0px;
+        width: 35px; 
         font-size: 24px;
         padding-top: -5px;
+        background-color: rgba($color: #ffffff00, $alpha: 1.0);
+        border: none; 
+        margin-left:3px ; 
         span {
           position: absolute;
           top: -5px;
@@ -58,6 +70,10 @@ body {
         }
         &:hover {
           cursor: pointer;
+          top: -2px;
+        }
+        &:active{
+          top: 0; 
         }
       }
     }

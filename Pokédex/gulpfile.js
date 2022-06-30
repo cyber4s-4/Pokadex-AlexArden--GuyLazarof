@@ -26,7 +26,7 @@ gulp.task("scss", () => {
 // Transfers index
 gulp.task("index", () => {
   return gulp
-    .src(["./src/*.html", "./src/favicon.ico"])
+    .src(["./src/*.html", "./src/favicon.ico", "src/*/*"]) 
     .pipe(gulp.dest("./dist"));
 });
 
