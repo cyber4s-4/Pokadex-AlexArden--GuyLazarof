@@ -6,6 +6,7 @@ $text-color: white;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  user-select: none;
 }
 
 body {
@@ -107,13 +108,16 @@ body {
         border: 2px solid rgb(143, 143, 143);
         background-color: rgb(222, 222, 222);
         border-radius: 4px;
+        img {
+          -webkit-user-drag: none;
+        }
         &:hover {
           animation: bounce 1s linear;
           cursor: url(img/cursor.png), auto;
         }
 
-        .name::first-letter {
-          text-transform: uppercase;
+        .name {
+          text-transform: capitalize;
           font-weight: bold;
         }
         .type::first-letter {
@@ -122,7 +126,6 @@ body {
       }
       .notFound {
         display: flex;
-        background-color: aqua;
         justify-content: center;
         align-items: center;
         height: auto;

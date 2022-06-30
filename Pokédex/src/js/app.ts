@@ -32,13 +32,17 @@ searchButton.addEventListener("click", () => {
     });
     if (foundPokemon === false) {
       if (input.value === "") {
-        showErrorMassage(container, input, "Please Enter A Pokemon Name!");
+        showErrorMassage(
+          container,
+          input,
+          `Please Enter A Pokemon Name! <img src="img/research.png" class="notFoundImg">`
+        );
         return;
       }
       showErrorMassage(
         container,
         input,
-        `<u>${input.value}</u> &nbsp Is Not A Pokemon`
+        `<u>${input.value}</u> &nbsp Is Not A Pokemon <img src="img/research.png" class="notFoundImg">`
       );
     }
   });
