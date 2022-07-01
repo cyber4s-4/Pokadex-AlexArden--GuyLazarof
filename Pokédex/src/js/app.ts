@@ -1,28 +1,33 @@
+
 import Pokemon from './Pokemon';
 
 //https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10
 
 let container = document.querySelector(".container") as HTMLDivElement;
 let input = document.querySelector(".input") as HTMLInputElement;
+console.log(localStorage.pokemons); 
 
-// Show searched pokemon or instead show error.
-let searchButton = document.querySelector(
-  ".search-button"
-) as HTMLButtonElement;
-
-searchButton.addEventListener("click", () => {
-  // Fix container to contain one element
-  container.style.width = "200px";
-  container.style.position = "relative";
-  container.style.left = "0";
-
+if(!localStorage.pokemons){  
   let list = getPokemonList(
     "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151"
   );
+  list.then(value => localStorage.setItem('pokemons', JSON.stringify(value)))   
+}
+    
 
-  list.then((value) => {
-    let foundPokemon = false;
-    value.results.forEach((item: { name: string; url: string }) => {
+
+// Show searched pokemon or instead show error.
+let searchButton = document.querySelector('.search-button') as HTMLButtonElement;
+
+searchButton.addEventListener("click", () => { 
+  // Fix container to contain one element
+  container.style.width = "200px"; 
+  container.style.position = "relative";
+  container.style.left = "0";
+
+    let pokemonList = JSON.parse(localStorage.pokemons); 
+    let foundPokemon = false; 
+    pokemonList.results.forEach((item: { name: string; url: string }) => {
       if (item.name === input.value) {
         container.innerHTML = "";
         renderPokemon(item.url);
@@ -46,7 +51,7 @@ searchButton.addEventListener("click", () => {
       );
     }
   });
-});
+
 
 let url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10";
 
