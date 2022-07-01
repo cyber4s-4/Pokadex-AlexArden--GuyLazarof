@@ -10,7 +10,7 @@ export default class Pokemon {
     let pokemonDiv = document.createElement("div");
     pokemonDiv.classList.add("pokemon");
     let type = pokemonData.types[0].type.name;
-    let typeImg: string;
+    let typeImg: string = ``;
     if (type === `bug`) {
       typeImg = "/img/ladybug.png";
     } else if (type === `water`) {
