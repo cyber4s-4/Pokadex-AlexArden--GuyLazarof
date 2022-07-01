@@ -5,8 +5,7 @@ import Pokemon from './Pokemon';
 
 let container = document.querySelector(".container") as HTMLDivElement;
 let input = document.querySelector(".input") as HTMLInputElement;
-console.log(localStorage.pokemons); 
-
+ 
 // Get a list of pokemons from API
 async function getPokemonList(url: string) {
   let pokemonList = await fetch(url);
@@ -14,13 +13,6 @@ async function getPokemonList(url: string) {
   return listData;
 }
 
-if(!localStorage.pokemons){  
-  let list = getPokemonList(
-    "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151"
-  );
-  list.then(value => localStorage.setItem('pokemons', JSON.stringify(value)))   
-}
-    
 // Show searched pokemon or instead show error.
 let searchButton = document.querySelector('.search-button') as HTMLButtonElement;
 
@@ -30,32 +22,35 @@ searchButton.addEventListener("click", () => {
   container.style.position = "relative";
   container.style.left = "0";
 
-    let pokemonList = JSON.parse(localStorage.pokemons); 
+   
+    let pokemonsList = getPokemonList('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151')
     let foundPokemon = false; 
-    pokemonList.results.forEach((item: { name: string; url: string }) => {
-      if (item.name === input.value) {
-        container.innerHTML = "";
-        renderPokemon(item.url);
-        input.value = "";
-        foundPokemon = true;
-      }
-    });
-    if (foundPokemon === false) {
-      if (input.value === "") {
+    pokemonsList.then(value => {
+      value.results.forEach((item: { name: string; url: string }) => {
+        if (item.name === input.value) {
+          container.innerHTML = "";
+          renderPokemon(item.url);
+          input.value = "";
+          foundPokemon = true;
+        }
+      });
+      if (foundPokemon === false) {
+        if (input.value === "") {
+          showErrorMassage(
+            container,
+            input,
+            `Please Enter A Pokemon Name! <img src="img/research.png" class="notFoundImg">`
+          );
+          return;
+        }
         showErrorMassage(
           container,
           input,
-          `Please Enter A Pokemon Name! <img src="img/research.png" class="notFoundImg">`
+          `<u>${input.value}</u> &nbsp Is Not A Pokemon <img src="img/research.png" class="notFoundImg">`
         );
-        return;
       }
-      showErrorMassage(
-        container,
-        input,
-        `<u>${input.value}</u> &nbsp Is Not A Pokemon <img src="img/research.png" class="notFoundImg">`
-      );
-    }
-  });
+    });
+  })
 
 
 let url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10";
@@ -96,11 +91,7 @@ homeButton.addEventListener("click", () => {
 });
 
 // Helper functions
-function showErrorMassage(
-  container: HTMLDivElement,
-  input: HTMLInputElement,
-  massage: string
-) {
+function showErrorMassage(container: HTMLDivElement,input: HTMLInputElement,massage: string) {
   container.innerHTML = "";
   let notExistsPokemon = document.createElement("div");
   notExistsPokemon.className = "notFound";
@@ -108,3 +99,5 @@ function showErrorMassage(
   container.appendChild(notExistsPokemon);
   input.value = "";
 }
+
+
