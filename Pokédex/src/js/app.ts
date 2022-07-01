@@ -7,6 +7,13 @@ let container = document.querySelector(".container") as HTMLDivElement;
 let input = document.querySelector(".input") as HTMLInputElement;
 console.log(localStorage.pokemons); 
 
+// Get a list of pokemons from API
+async function getPokemonList(url: string) {
+  let pokemonList = await fetch(url);
+  let listData = await pokemonList.json();
+  return listData;
+}
+
 if(!localStorage.pokemons){  
   let list = getPokemonList(
     "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151"
@@ -14,8 +21,6 @@ if(!localStorage.pokemons){
   list.then(value => localStorage.setItem('pokemons', JSON.stringify(value)))   
 }
     
-
-
 // Show searched pokemon or instead show error.
 let searchButton = document.querySelector('.search-button') as HTMLButtonElement;
 
@@ -54,13 +59,6 @@ searchButton.addEventListener("click", () => {
 
 
 let url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10";
-
-// Get a list of pokemons
-async function getPokemonList(url: string) {
-  let pokemonList = await fetch(url);
-  let listData = await pokemonList.json();
-  return listData;
-}
 
 // Render pokemon
 async function renderPokemon(url: string) {
