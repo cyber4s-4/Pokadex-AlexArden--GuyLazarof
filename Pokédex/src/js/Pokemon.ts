@@ -39,6 +39,8 @@ export default class Pokemon {
       typeImg = `/img/crystal-ball.png`;
     } else if (type === `ground`) {
       typeImg = `/img/dunes.png`;
+    } else {
+      typeImg = `?`;
     }
     // if ( type.innerHTML ===ground) {
     //   type
@@ -48,7 +50,7 @@ export default class Pokemon {
      <div class="name">${pokemonData.name}</div>
      <div class="heigth">Height: ${pokemonData.height / 10} meter</div>
      <div class="weigth">Weigth: ${pokemonData.weight / 10} kg</div>
-     <div class="type"><img src="${typeImg}"/>${type} </div>
+     <div class="type"><img src="${typeImg}" />${type} </div>
     `;
     parent.appendChild(pokemonDiv);
   }
