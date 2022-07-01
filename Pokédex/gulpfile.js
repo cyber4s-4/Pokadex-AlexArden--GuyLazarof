@@ -48,7 +48,7 @@ gulp.task("browser-sync-watch", () => {
 
 // Watch scss files
 gulp.task("watch-scss", () => {
-  return gulp.watch("./src/**/*.scss", gulp.series("scss"));
+  return gulp.watch("./src/*.scss", gulp.series("scss"));
 });
 
 // Watch html files

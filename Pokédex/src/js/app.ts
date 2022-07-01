@@ -1,11 +1,11 @@
-
 import Pokemon from './Pokemon';
 
 //https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10
 
 let container = document.querySelector(".container") as HTMLDivElement;
 let input = document.querySelector(".input") as HTMLInputElement;
- 
+
+let paginationDiv = document.querySelector(".pagination") as HTMLDivElement;
 // Get a list of pokemons from API
 async function getPokemonList(url: string) {
   let pokemonList = await fetch(url);
@@ -14,44 +14,46 @@ async function getPokemonList(url: string) {
 }
 
 // Show searched pokemon or instead show error.
-let searchButton = document.querySelector('.search-button') as HTMLButtonElement;
+let searchButton = document.querySelector(
+  ".search-button"
+) as HTMLButtonElement;
 
-searchButton.addEventListener("click", () => { 
+searchButton.addEventListener("click", () => {
   // Fix container to contain one element
-  container.style.width = "200px"; 
+  container.style.width = "200px";
   container.style.position = "relative";
   container.style.left = "0";
-
-   
-    let pokemonsList = getPokemonList('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151')
-    let foundPokemon = false; 
-    pokemonsList.then(value => {
-      value.results.forEach((item: { name: string; url: string }) => {
-        if (item.name === input.value) {
-          container.innerHTML = "";
-          renderPokemon(item.url);
-          input.value = "";
-          foundPokemon = true;
-        }
-      });
-      if (foundPokemon === false) {
-        if (input.value === "") {
-          showErrorMassage(
-            container,
-            input,
-            `Please Enter A Pokemon Name! <img src="img/research.png" class="notFoundImg">`
-          );
-          return;
-        }
+  paginationDiv.style.display = "none";
+  let pokemonsList = getPokemonList(
+    "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151"
+  );
+  let foundPokemon = false;
+  pokemonsList.then((value) => {
+    value.results.forEach((item: { name: string; url: string }) => {
+      if (item.name === input.value) {
+        container.innerHTML = "";
+        renderPokemon(item.url);
+        input.value = "";
+        foundPokemon = true;
+      }
+    });
+    if (foundPokemon === false) {
+      if (input.value === "") {
         showErrorMassage(
           container,
           input,
-          `<u>${input.value}</u> &nbsp Is Not A Pokemon <img src="img/research.png" class="notFoundImg">`
+          `Please Enter A Pokemon Name! <img src="img/research.png" class="notFoundImg">`
         );
+        return;
       }
-    });
-  })
-
+      showErrorMassage(
+        container,
+        input,
+        `<u>${input.value}</u> &nbsp Is Not A Pokemon <img src="img/research.png" class="notFoundImg">`
+      );
+    }
+  });
+});
 
 let url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10";
 
@@ -71,7 +73,7 @@ allPokemons.addEventListener("click", () => {
   container.style.width = "600px";
   container.style.position = "absolute";
   container.style.left = "-110px";
-
+  paginationDiv.style.display = "none";
   let pokemonList = getPokemonList(url);
   let list = getPokemonList(
     "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151"
@@ -88,10 +90,17 @@ allPokemons.addEventListener("click", () => {
 let homeButton = document.querySelector(".homeButton") as HTMLDivElement;
 homeButton.addEventListener("click", () => {
   container.innerHTML = "";
+  container.style.position = "relative";
+  paginationDiv.style.top = "200px";
+  paginationDiv.style.display = "block";
 });
 
 // Helper functions
-function showErrorMassage(container: HTMLDivElement,input: HTMLInputElement,massage: string) {
+function showErrorMassage(
+  container: HTMLDivElement,
+  input: HTMLInputElement,
+  massage: string
+) {
   container.innerHTML = "";
   let notExistsPokemon = document.createElement("div");
   notExistsPokemon.className = "notFound";
@@ -100,4 +109,31 @@ function showErrorMassage(container: HTMLDivElement,input: HTMLInputElement,mass
   input.value = "";
 }
 
+function pagination(num: number) {
+  let pages: number = Math.ceil(num / 10);
+  for (let i = 0; i < pages; i++) {
+    let pageButton: HTMLButtonElement = document.createElement("button");
+    pageButton.addEventListener(`click`, () => {
+      container.innerHTML = "";
+      container.style.width = "600px";
+      container.style.position = "absolute";
+      container.style.left = "-110px";
+      paginationDiv.style.top = "670px";
+      let list = getPokemonList(
+        `https://pokeapi.co/api/v2/pokemon/?offset=${i * 9}&limit=9`
+      );
 
+      list.then((value) => {
+        value.results.forEach((item: { url: string; name: string }) => {
+          renderPokemon(item.url);
+        });
+      });
+    });
+    pageButton.innerHTML = `${i + 1}`;
+    pageButton.className = "p-button";
+
+    paginationDiv.appendChild(pageButton);
+  }
+}
+
+pagination(80);

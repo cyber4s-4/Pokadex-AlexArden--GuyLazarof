@@ -13,6 +13,7 @@ body {
   background-color: rgb(255, 255, 255);
   header {
     padding-top: 3vh;
+    min-height: 80px;
     height: 10vh;
     background-color: #d2615d;
     margin-bottom: 23px;
@@ -64,7 +65,7 @@ body {
           box-sizing: border-box;
         }
       }
-      button {
+      .search-button {
         display: inline;
         position: absolute;
         height: 3vh;
@@ -92,7 +93,7 @@ body {
     }
     div.container {
       min-width: fit-content;
-      min-height: 75vh;
+      min-height: 400px;
       height: fit-content;
       padding: 1vh;
       margin: 10px auto;
@@ -135,6 +136,17 @@ body {
           height: 40px;
           margin: 20px;
         }
+      }
+    }
+    .pagination {
+      position: absolute;
+      top: 200px;
+      left: 55px;
+      .p-button {
+        background-color: rgb(31, 236, 255);
+        height: 30px;
+        width: 30px;
+        margin-right: 5px;
       }
     }
   }
