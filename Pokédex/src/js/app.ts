@@ -57,6 +57,30 @@ searchButton.addEventListener("click", () => {
 
 let url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10";
 
+// Search by key down
+input.addEventListener("keydown", () => {
+  // Fix container to contain one element
+  container.style.width = "200px";
+  container.style.position = "relative";
+  container.style.left = "0";
+  paginationDiv.style.display = "none";
+  let pokemonsList = getPokemonList(
+    "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151"
+  );
+  let foundPokemon = false;
+  pokemonsList.then((value) => {
+    value.results.forEach((item: { name: string; url: string }) => {
+      if (item.name.includes(input.value)) {
+        container.innerHTML = "";
+        renderPokemon(item.url);
+        foundPokemon = true;
+      } else {
+        container.innerHTML = "";
+      }
+    });
+  });
+});
+
 // Render pokemon
 async function renderPokemon(url: string) {
   let pokemons = await fetch(url);
