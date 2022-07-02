@@ -8,7 +8,7 @@ let input = document.querySelector(".input") as HTMLInputElement;
 let paginationDiv = document.querySelector(".pagination") as HTMLDivElement;
 let homePageDiv = document.querySelector(".homePage") as HTMLDivElement;
 let homePageDiv2 = document.querySelector("#homePage2") as HTMLDivElement;
-
+let mainEl = document.querySelector("main") as HTMLElement;
 // Get a list of pokemons from API
 async function getPokemonList(url: string) {
   let pokemonList = await fetch(url);
@@ -118,12 +118,23 @@ allPokemons.addEventListener("click", () => {
 let homeButton = document.querySelector(".homeButton") as HTMLDivElement;
 homeButton.addEventListener("click", () => {
   location.href = "http://localhost:4000/";
-  // container.innerHTML = "";
-  // container.style.position = "relative";
-  // paginationDiv.style.top = "200px";
-  // paginationDiv.style.display = "block";
 });
 
+// About button functionality
+let aboutButton = document.querySelector(".aboutButton") as HTMLDivElement;
+aboutButton.addEventListener("click", () => {
+  searchButton.style.display = "none";
+  paginationDiv.style.display = "none";
+  input.style.display = "none";
+  homePageDiv.style.display = "none";
+  homePageDiv2.style.display = "none";
+  let aboutContainer = document.createElement("div");
+  aboutContainer.className = "aboutContainer";
+  container.innerHTML = "";
+  aboutContainer.innerHTML =
+    "Hi we are Alex Arden and Guy Lazarof - we loves pokemon! and we would like to spread that love to other people like you, feel free to share our website";
+  container.appendChild(aboutContainer);
+});
 // Helper functions
 function showErrorMassage(
   container: HTMLDivElement,
