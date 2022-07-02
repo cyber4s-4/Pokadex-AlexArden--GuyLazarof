@@ -39,6 +39,8 @@ export default class Pokemon {
       typeImg = `/img/crystal-ball.png`;
     } else if (type === `ground`) {
       typeImg = `/img/dunes.png`;
+    } else if (type === `ghost`) {
+      typeImg = `/img/ghost.png`;
     } else {
       typeImg = `?`;
     }
