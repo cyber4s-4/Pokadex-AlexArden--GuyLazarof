@@ -10,43 +10,7 @@ export default class Pokemon {
     let pokemonDiv = document.createElement("div");
     pokemonDiv.classList.add("pokemon");
     let type = pokemonData.types[0].type.name;
-    let typeImg: string = ``;
-    if (type === `bug`) {
-      typeImg = "/img/ladybug.png";
-    } else if (type === `water`) {
-      typeImg = `/img/water-drop.png`;
-    } else if (type === `poison`) {
-      typeImg = `/img/virus.png`;
-    } else if (type === `electric`) {
-      typeImg = `/img/lightning.png`;
-    } else if (type === `fire`) {
-      typeImg = `/img/fire.png`;
-    } else if (type === `rock`) {
-      typeImg = `/img/rock.png`;
-    } else if (type === `ice`) {
-      typeImg = `/img/snowflake.png`;
-    } else if (type === `grass`) {
-      typeImg = `/img/grass.png`;
-    } else if (type === `fighting`) {
-      typeImg = `/img/fight.png`;
-    } else if (type === `fairy`) {
-      typeImg = `/img/fairy.png`;
-    } else if (type === `dragon`) {
-      typeImg = `/img/dragon.png`;
-    } else if (type === `normal`) {
-      typeImg = `/img/popular.png`;
-    } else if (type === `psychic`) {
-      typeImg = `/img/crystal-ball.png`;
-    } else if (type === `ground`) {
-      typeImg = `/img/dunes.png`;
-    } else if (type === `ghost`) {
-      typeImg = `/img/ghost.png`;
-    } else {
-      typeImg = `?`;
-    }
-    // if ( type.innerHTML ===ground) {
-    //   type
-    // }
+    let typeImg: string = `/img/${type}.png`;
     pokemonDiv.innerHTML = `
      <img src="${pokemonData.sprites.front_default}">
      <div class="name">${pokemonData.name}</div>
