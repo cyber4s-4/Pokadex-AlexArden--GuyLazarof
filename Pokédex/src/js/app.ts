@@ -6,6 +6,9 @@ let container = document.querySelector(".container") as HTMLDivElement;
 let input = document.querySelector(".input") as HTMLInputElement;
 
 let paginationDiv = document.querySelector(".pagination") as HTMLDivElement;
+let homePageDiv = document.querySelector(".homePage") as HTMLDivElement;
+let homePageDiv2 = document.querySelector("#homePage2") as HTMLDivElement;
+
 // Get a list of pokemons from API
 async function getPokemonList(url: string) {
   let pokemonList = await fetch(url);
@@ -92,7 +95,8 @@ async function renderPokemon(url: string) {
 let allPokemons = document.querySelector(".allPokemons") as HTMLDivElement;
 allPokemons.addEventListener("click", () => {
   container.innerHTML = "";
-
+  homePageDiv.style.display = "none";
+  homePageDiv2.style.display = "none";
   // Fix container to contain three elements
   container.style.width = "600px";
   container.style.position = "absolute";
@@ -113,10 +117,11 @@ allPokemons.addEventListener("click", () => {
 // Home button functionality
 let homeButton = document.querySelector(".homeButton") as HTMLDivElement;
 homeButton.addEventListener("click", () => {
-  container.innerHTML = "";
-  container.style.position = "relative";
-  paginationDiv.style.top = "200px";
-  paginationDiv.style.display = "block";
+  location.href = "http://localhost:4000/";
+  // container.innerHTML = "";
+  // container.style.position = "relative";
+  // paginationDiv.style.top = "200px";
+  // paginationDiv.style.display = "block";
 });
 
 // Helper functions
@@ -132,19 +137,22 @@ function showErrorMassage(
   container.appendChild(notExistsPokemon);
   input.value = "";
 }
-
+//pagination function
 function pagination(num: number) {
-  let pages: number = Math.ceil(num / 10);
+  let pages: number = Math.ceil(num / 18);
   for (let i = 0; i < pages; i++) {
     let pageButton: HTMLButtonElement = document.createElement("button");
     pageButton.addEventListener(`click`, () => {
       container.innerHTML = "";
       container.style.width = "600px";
       container.style.position = "absolute";
-      container.style.left = "-110px";
-      paginationDiv.style.top = "670px";
+      container.style.left = "-105px";
+      paginationDiv.style.top = "1300px";
+      homePageDiv.style.display = "none";
+      homePageDiv2.style.display = "none";
+
       let list = getPokemonList(
-        `https://pokeapi.co/api/v2/pokemon/?offset=${i * 9}&limit=9`
+        `https://pokeapi.co/api/v2/pokemon/?offset=${i * 18}&limit=18`
       );
 
       list.then((value) => {
@@ -160,4 +168,4 @@ function pagination(num: number) {
   }
 }
 
-pagination(80);
+pagination(162);
