@@ -33,8 +33,8 @@ searchButton.addEventListener("click", () => {
   let foundPokemon = false;
   pokemonsList.then((value) => {
     value.results.forEach((item: { name: string; url: string }) => {
-      if (item.name === input.value) {
-        container.innerHTML = "";
+      if (item.name === input.value.toLowerCase()) {
+        container.innerHTML = ""; 
         renderPokemon(item.url);
         input.value = "";
         foundPokemon = true;
@@ -73,7 +73,7 @@ input.addEventListener("keydown", () => {
   let foundPokemon = false;
   pokemonsList.then((value) => {
     value.results.forEach((item: { name: string; url: string }) => {
-      if (item.name.includes(input.value)) {
+      if (item.name.includes(input.value.toLowerCase())) {
         container.innerHTML = "";
         renderPokemon(item.url);
         foundPokemon = true;
@@ -132,9 +132,10 @@ aboutButton.addEventListener("click", () => {
   aboutContainer.className = "aboutContainer";
   container.innerHTML = "";
   aboutContainer.innerHTML =
-    "Hi we are Alex Arden and Guy Lazarof - we loves pokemon! and we would like to spread that love to other people like you, feel free to share our website";
+    "Hi we are Alex Arden and Guy Lazarof - we love pokemons! and we would like to spread that love to other people like you, feel free to share our website";
   container.appendChild(aboutContainer);
 });
+
 // Helper functions
 function showErrorMassage(
   container: HTMLDivElement,
@@ -148,6 +149,7 @@ function showErrorMassage(
   container.appendChild(notExistsPokemon);
   input.value = "";
 }
+
 //pagination function
 function pagination(num: number) {
   let pages: number = Math.ceil(num / 18);
