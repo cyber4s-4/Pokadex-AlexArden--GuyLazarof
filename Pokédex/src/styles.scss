@@ -52,7 +52,7 @@ body {
     div.search {
       width: 400px;
       height: 3vh;
-      margin: 0 auto;
+      margin: 0 auto; 
       position: relative;
 
       input {
@@ -175,6 +175,9 @@ body {
         width: 20px;
         border-radius: 10px;
         margin-right: 5px;
+        &:hover{
+          cursor: pointer; 
+        }
       }
     }
   }
