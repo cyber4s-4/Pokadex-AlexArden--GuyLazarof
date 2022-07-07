@@ -179,7 +179,7 @@ body {
         font-weight: bold;  
         &:hover{ 
           cursor: pointer;  
-          transform: rotateZ(10deg);  
+          animation: swing 0.7s linear;     
         }
       
       }
@@ -204,3 +204,22 @@ body {
     transform: translateY(-10px);
   }
 }
+
+@keyframes swing {
+ 
+  25% {
+    transform: rotateZ(15deg);
+  }
+  50% {
+    transform: rotateZ(-15deg);
+  }
+  80% {
+    transform: rotateZ(5deg);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
+}
+
+
+
