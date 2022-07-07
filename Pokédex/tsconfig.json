@@ -13,6 +13,8 @@
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
     "tsBuildInfoFile": "./dist/cache/tsc.json",
-    "strict": true
+    "strict": true,
+    "esModuleInterop": true
+
   }
 }

@@ -4,11 +4,14 @@ import Pokemon from './Pokemon';
 
 let container = document.querySelector(".container") as HTMLDivElement;
 let input = document.querySelector(".input") as HTMLInputElement;
-
 let paginationDiv = document.querySelector(".pagination") as HTMLDivElement;
 let homePageDiv = document.querySelector(".homePage") as HTMLDivElement;
 let homePageDiv2 = document.querySelector("#homePage2") as HTMLDivElement;
 let mainEl = document.querySelector("main") as HTMLElement;
+
+
+let tmp: any = []; 
+
 // Get a list of pokemons from API
 async function getPokemonList(url: string) {
   let pokemonList = await fetch(url);
@@ -88,6 +91,7 @@ input.addEventListener("keydown", () => {
 async function renderPokemon(url: string) {
   let pokemons = await fetch(url);
   let data = await pokemons.json();
+  tmp.push(data);
   let pokemon = new Pokemon(container, data);
 }
 
@@ -111,6 +115,8 @@ allPokemons.addEventListener("click", () => {
     value.results.forEach((item: { url: string; name: string }) => {
       renderPokemon(item.url);
     });
+    console.log(tmp); 
+    
   });
 });
 
