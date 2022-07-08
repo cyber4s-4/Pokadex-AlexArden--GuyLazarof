@@ -116,15 +116,15 @@ allPokemons.addEventListener("click", () => {
       renderPokemon(item.url);
     });
     console.log(tmp); 
-    
+    c
   });
 });
 
 // Home button functionality
 let homeButton = document.querySelector(".homeButton") as HTMLDivElement;
 homeButton.addEventListener("click", () => {
-  location.href = "http://localhost:4000/";
-});
+  location.href = "http://localhost:3000/"; 
+}); 
 
 // About button functionality
 let aboutButton = document.querySelector(".aboutButton") as HTMLDivElement;

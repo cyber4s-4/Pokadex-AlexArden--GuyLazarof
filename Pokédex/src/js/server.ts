@@ -5,17 +5,19 @@ const fs = require('fs');
 const path = require('path');
 const app = express();
 app.use(json());
-interface User {
-  name: string;
-  about: string;
-  avatar: string;
-  id: string;
-}
-app.listen(3000);
+   
+const pokemonList = JSON.parse(fs.readFileSync('C:/Users/alexc/Desktop/Pokedex-AlexArden--GuyLazarof/Pokédex/dist/data.json'));
+
+app.use(express.static('C:/Users/alexc/Desktop/Pokedex-AlexArden--GuyLazarof/Pokédex/dist')); 
 
 app.get('/', (req: Request, res: Response) => {
-  res.status(200).send();
+  res.sendFile(path.join(__dirname + './../index.html'))     
 });
+
+app.listen(3000, () => {
+  console.log(`Listening on port 3000`); 
+}); 
+
 
 // const filePath: string = path.join(__dirname, '../data/data.json');
 // const readFileData: User[] = JSON.parse(fs.readFileSync(filePath, 'utf8'));

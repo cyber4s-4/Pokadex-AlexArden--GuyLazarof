@@ -7,14 +7,15 @@
     "baseUrl": "./",
     "outDir": "./dist/",
     "rootDir": "./src/",
-    "noUnusedLocals": true,
+    "noUnusedLocals": false, 
     "sourceMap": true,
     "noUnusedParameters": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
     "tsBuildInfoFile": "./dist/cache/tsc.json",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    
 
   }
 }

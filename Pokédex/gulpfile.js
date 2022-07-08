@@ -23,10 +23,10 @@ gulp.task("scss", () => {
   return gulp.src("./src/**/*.scss").pipe(sass()).pipe(gulp.dest("./dist"));
 });
 
-// Transfers index
+// Transfers files
 gulp.task("index", () => {
   return gulp
-    .src(["./src/*.html", "./src/favicon.ico", "./src/*/*"])
+    .src(["./src/*.html", "./src/favicon.ico", "./src/*/*", "./src/data.json"]) 
     .pipe(gulp.dest("./dist"));
 });
 
