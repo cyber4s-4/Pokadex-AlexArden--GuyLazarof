@@ -7,10 +7,10 @@ export default class Pokemon {
     this.render(parent, pokemonData);
   }
   render(parent: HTMLDivElement, pokemonData: pokemon) {
-    let pokemonDiv = document.createElement("div");
-    pokemonDiv.classList.add("pokemon");
-    let type = pokemonData.types[0].type.name;
-    let typeImg: string = `/img/${type}.png`;
+    const pokemonDiv = document.createElement('div');
+    pokemonDiv.classList.add('pokemon');
+    const type = pokemonData.types[0].type.name;
+    const typeImg = `/img/${type}.png`;
     pokemonDiv.innerHTML = `
      <img src="${pokemonData.sprites.front_default}">
      <div class="name">${pokemonData.name}</div>

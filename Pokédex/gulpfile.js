@@ -5,7 +5,6 @@ const webpack = require("webpack-stream");
 const sass = require("gulp-sass")(require("sass"));
 const browserSync = require("browser-sync").create();
 const { exec } = require("child_process");
-
 const webpackConfig = require("./webpack.config.js");
 
 // Removes previous dist
@@ -34,7 +33,7 @@ gulp.task("index", () => {
 gulp.task("browser-sync", () => {
   browserSync.init({
     browser: "default",
-    port: 4000,
+    port: 4000,  
     server: { baseDir: "./dist" },
   });
 });
