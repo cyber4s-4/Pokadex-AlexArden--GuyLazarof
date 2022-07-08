@@ -1,6 +1,7 @@
 import { json } from 'body-parser';
 import express from 'express';
 import { Request, Response } from 'express';
+import Pokemon from './Pokemon';
 const fs = require('fs');
 const path = require('path');
 const app = express();
@@ -11,7 +12,11 @@ const pokemonList = JSON.parse(fs.readFileSync('C:/Users/alexc/Desktop/Pokedex-A
 app.use(express.static('C:/Users/alexc/Desktop/Pokedex-AlexArden--GuyLazarof/Pokédex/dist')); 
 
 app.get('/', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname + './../index.html'))     
+  res.sendFile(path.join(__dirname + './../index.html'));     
+});
+
+app.get('/pokemons', (req: Request, res: Response) => {
+  res.send(pokemonList);   
 });
 
 app.listen(3000, () => {

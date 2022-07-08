@@ -65,11 +65,13 @@ let url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10";
 
 // Search by key down
 input.addEventListener("keydown", () => {
+
   // Fix container to contain one element
   container.style.width = "200px";
   container.style.position = "relative";
   container.style.left = "0";
   paginationDiv.style.display = "none";
+
   let pokemonsList = getPokemonList(
     "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151"
   );
@@ -88,16 +90,17 @@ input.addEventListener("keydown", () => {
 });
 
 // Render pokemon
-async function renderPokemon(url: string) {
-  let pokemons = await fetch(url);
-  let data = await pokemons.json();
-  tmp.push(data);
+async function renderPokemon(data: any) { 
   let pokemon = new Pokemon(container, data);
 }
 
 // Show all pokemons
 let allPokemons = document.querySelector(".allPokemons") as HTMLDivElement;
+
+// Server
+
 allPokemons.addEventListener("click", () => {
+
   container.innerHTML = "";
   homePageDiv.style.display = "none";
   homePageDiv2.style.display = "none";
@@ -105,20 +108,41 @@ allPokemons.addEventListener("click", () => {
   container.style.width = "600px";
   container.style.position = "absolute";
   container.style.left = "-110px";
-  paginationDiv.style.display = "none";
-  let pokemonList = getPokemonList(url);
-  let list = getPokemonList(
-    "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151"
-  );
+  paginationDiv.style.display = "none"; 
 
-  list.then((value) => {
-    value.results.forEach((item: { url: string; name: string }) => {
-      renderPokemon(item.url);
-    });
-    console.log(tmp); 
-    c
-  });
-});
+ async function fetchDataFromServer() {
+  let dataFromServer = await fetch('http://localhost:3000/pokemons');
+   dataFromServer.json().then(pokemons => {
+    pokemons.forEach((pokemon: any) => {
+      renderPokemon(pokemon); 
+    })
+   });  
+  }
+  fetchDataFromServer(); 
+})
+
+// API
+
+// allPokemons.addEventListener("click", () => {
+//   container.innerHTML = "";
+//   homePageDiv.style.display = "none";
+//   homePageDiv2.style.display = "none";
+//   // Fix container to contain three elements
+//   container.style.width = "600px";
+//   container.style.position = "absolute";
+//   container.style.left = "-110px";
+//   paginationDiv.style.display = "none";
+//   let pokemonList = getPokemonList(url);
+//   let list = getPokemonList(
+//     "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151"
+//   );
+
+//   list.then((value) => {
+//     value.results.forEach((item: { url: string; name: string }) => {
+//       renderPokemon(item.url);
+//     });
+//   });
+// });
 
 // Home button functionality
 let homeButton = document.querySelector(".homeButton") as HTMLDivElement;
