@@ -93,7 +93,7 @@ body {
       }
     }
     div.container {
-      min-width: fit-content;
+      min-width: 200px; 
       min-height: 400px;
       height: fit-content;
       padding: 1vh;
@@ -165,10 +165,9 @@ body {
     }
 
     .pagination {
-      position: absolute;
-      top: 340px;
-      left: 45px;   
+      position: relative; 
       width: fit-content; 
+      margin: 10px auto;  
       .p-button {
         background: linear-gradient(180deg, #fe153c 50%, #dfdfdf 50%); 
         height: 30px;

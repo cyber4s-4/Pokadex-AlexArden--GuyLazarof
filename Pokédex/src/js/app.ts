@@ -1,3 +1,4 @@
+import { render } from 'sass';
 import Pokemon from './Pokemon';
 
 //https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10
@@ -10,7 +11,8 @@ let homePageDiv2 = document.querySelector("#homePage2") as HTMLDivElement;
 let mainEl = document.querySelector("main") as HTMLElement;
 
 
-let tmp: any = []; 
+let pokemonList: any = [];
+getDataFromServer();
 
 // Get a list of pokemons from API
 async function getPokemonList(url: string) {
@@ -37,7 +39,7 @@ searchButton.addEventListener("click", () => {
   pokemonsList.then((value) => {
     value.results.forEach((item: { name: string; url: string }) => {
       if (item.name === input.value.toLowerCase()) {
-        container.innerHTML = ""; 
+        container.innerHTML = "";
         renderPokemon(item.url);
         input.value = "";
         foundPokemon = true;
@@ -72,32 +74,41 @@ input.addEventListener("keydown", () => {
   container.style.left = "0";
   paginationDiv.style.display = "none";
 
-  let pokemonsList = getPokemonList(
-    "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151"
-  );
-  let foundPokemon = false;
-  pokemonsList.then((value) => {
-    value.results.forEach((item: { name: string; url: string }) => {
-      if (item.name.includes(input.value.toLowerCase())) {
+  // let pokemonsList = getPokemonList(
+  //   "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151"
+  // );
+  fetch('http://localhost:3000/pokemons').then(data => data.json()).then(pokemons => 
+    pokemons.forEach((pokemon: any) => {
+      if(pokemon.name.includes(input.value)) {
         container.innerHTML = "";
-        renderPokemon(item.url);
-        foundPokemon = true;
+        renderPokemon(pokemon); 
       } else {
         container.innerHTML = "";
       }
-    });
-  });
-});
+    })
+  )
+}); 
+//   let foundPokemon = false;
+//   pokemonsList.then((value) => {
+//     value.results.forEach((item: { name: string; url: string }) => {
+//       if (item.name.includes(input.value.toLowerCase())) {
+//         container.innerHTML = "";
+//         renderPokemon(item.url);
+//         foundPokemon = true;
+//       } else {
+//         container.innerHTML = "";
+//       }
+//     });
+//   });
+// }); 
 
-// Render pokemon
-async function renderPokemon(data: any) { 
+// Render pokemon 
+async function renderPokemon(data: any) {
   let pokemon = new Pokemon(container, data);
 }
 
-// Show all pokemons
+// Show all pokemons from server
 let allPokemons = document.querySelector(".allPokemons") as HTMLDivElement;
-
-// Server
 
 allPokemons.addEventListener("click", () => {
 
@@ -106,49 +117,18 @@ allPokemons.addEventListener("click", () => {
   homePageDiv2.style.display = "none";
   // Fix container to contain three elements
   container.style.width = "600px";
-  container.style.position = "absolute";
-  container.style.left = "-110px";
-  paginationDiv.style.display = "none"; 
+    
 
- async function fetchDataFromServer() {
-  let dataFromServer = await fetch('http://localhost:3000/pokemons');
-   dataFromServer.json().then(pokemons => {
-    pokemons.forEach((pokemon: any) => {
-      renderPokemon(pokemon); 
-    })
-   });  
-  }
-  fetchDataFromServer(); 
+  pokemonList.forEach((pokemon: Pokemon) => {
+    renderPokemon(pokemon); 
+  });
 })
-
-// API
-
-// allPokemons.addEventListener("click", () => {
-//   container.innerHTML = "";
-//   homePageDiv.style.display = "none";
-//   homePageDiv2.style.display = "none";
-//   // Fix container to contain three elements
-//   container.style.width = "600px";
-//   container.style.position = "absolute";
-//   container.style.left = "-110px";
-//   paginationDiv.style.display = "none";
-//   let pokemonList = getPokemonList(url);
-//   let list = getPokemonList(
-//     "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151"
-//   );
-
-//   list.then((value) => {
-//     value.results.forEach((item: { url: string; name: string }) => {
-//       renderPokemon(item.url);
-//     });
-//   });
-// });
 
 // Home button functionality
 let homeButton = document.querySelector(".homeButton") as HTMLDivElement;
 homeButton.addEventListener("click", () => {
-  location.href = "http://localhost:3000/"; 
-}); 
+  location.href = "http://localhost:3000/";
+});
 
 // About button functionality
 let aboutButton = document.querySelector(".aboutButton") as HTMLDivElement;
@@ -161,17 +141,40 @@ aboutButton.addEventListener("click", () => {
   let aboutContainer = document.createElement("div");
   aboutContainer.className = "aboutContainer";
   container.innerHTML = "";
-  aboutContainer.innerHTML =
-    "Hi we are Alex Arden and Guy Lazarof - we love pokemons! and we would like to spread that love to other people like you, feel free to share our website";
+  aboutContainer.innerHTML = `
+    Hi we are Alex Arden and Guy Lazarof - we love pokemons!
+    and we would like to spread that love to other people like you,
+    feel free to share our website
+    `;
   container.appendChild(aboutContainer);
 });
 
+
+// Pagination function
+function pagination(num: number) {
+  let pages: number = Math.ceil(num / 10);
+  for (let i = 0; i < pages; i++) { 
+    let pageButton: HTMLButtonElement = document.createElement("button");
+    pageButton.innerHTML = `${i + 1}`;
+    pageButton.className = "p-button";
+    pageButton.addEventListener(`click`, () => {
+      container.innerHTML = "";
+      homePageDiv.style.display = "none";
+      homePageDiv2.style.display = "none";
+      // Fix container to contain three elements
+      container.style.width = "600px";  
+     for(let i = 0; i < 9; i++){
+      renderPokemon(pokemonList[(Number(pageButton.innerHTML) - 1) * 9 + i])  
+     }
+    })
+    paginationDiv.appendChild(pageButton);
+  }
+}
+
+pagination(162);
+
 // Helper functions
-function showErrorMassage(
-  container: HTMLDivElement,
-  input: HTMLInputElement,
-  massage: string
-) {
+function showErrorMassage(container: HTMLDivElement, input: HTMLInputElement, massage: string) {
   container.innerHTML = "";
   let notExistsPokemon = document.createElement("div");
   notExistsPokemon.className = "notFound";
@@ -180,35 +183,11 @@ function showErrorMassage(
   input.value = "";
 }
 
-//pagination function
-function pagination(num: number) {
-  let pages: number = Math.ceil(num / 18);
-  for (let i = 0; i < pages; i++) {
-    let pageButton: HTMLButtonElement = document.createElement("button");
-    pageButton.addEventListener(`click`, () => {
-      container.innerHTML = "";
-      container.style.width = "600px";
-      container.style.position = "absolute";
-      container.style.left = "-105px";
-      paginationDiv.style.top = "1300px";
-      homePageDiv.style.display = "none";
-      homePageDiv2.style.display = "none";
-
-      let list = getPokemonList(
-        `https://pokeapi.co/api/v2/pokemon/?offset=${i * 18}&limit=18`
-      );
-
-      list.then((value) => {
-        value.results.forEach((item: { url: string; name: string }) => {
-          renderPokemon(item.url);
-        });
-      });
-    });
-    pageButton.innerHTML = `${i + 1}`;
-    pageButton.className = "p-button";
-
-    paginationDiv.appendChild(pageButton);
-  }
+async function getDataFromServer() { 
+  let dataFromServer = await fetch('http://localhost:3000/pokemons');
+  dataFromServer.json().then(pokemons => {
+    pokemons.forEach((pokemon: Pokemon) => {
+      pokemonList.push(pokemon)
+    })
+  });
 }
-
-pagination(162);
