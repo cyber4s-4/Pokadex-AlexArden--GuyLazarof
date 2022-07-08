@@ -25,18 +25,18 @@ gulp.task("scss", () => {
 // Transfers files
 gulp.task("index", () => {
   return gulp
-    .src(["./src/*.html", "./src/favicon.ico", "./src/*/*", "./src/data.json"]) 
+    .src(["./src/*.html", "./src/favicon.ico", "./src/*/*", "./src/data.json"])
     .pipe(gulp.dest("./dist"));
 });
 
-// Browser Sync
-gulp.task("browser-sync", () => {
-  browserSync.init({
-    browser: "default",
-    port: 4000,  
-    server: { baseDir: "./dist" },
-  });
-});
+// // Browser Sync
+// gulp.task("browser-sync", () => {
+//   browserSync.init({
+//     browser: "default",
+//     port: 4000,
+//     server: { baseDir: "./dist" },
+//   });
+// });
 
 // Browser Sync live reload
 gulp.task("browser-sync-watch", () => {
@@ -82,8 +82,8 @@ gulp.task(
     "tsc",
     "build",
     gulp.parallel(
-      "browser-sync",
-      "browser-sync-watch",
+      // "browser-sync",
+      // "browser-sync-watch",
       "watch-scss",
       "watch-html",
       "watch-tsc",
