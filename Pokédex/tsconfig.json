@@ -9,7 +9,7 @@
     "rootDir": "./src/",
     "noUnusedLocals": false, 
     "sourceMap": true,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false, 
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
     "tsBuildInfoFile": "./dist/cache/tsc.json",

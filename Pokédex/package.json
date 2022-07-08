@@ -27,6 +27,7 @@
     "source-map-loader": "^3.0.1",
     "ts-jest": "^28.0.4",
     "typescript": "^4.6.4",
+    "webpack": "^5.73.0",
     "webpack-stream": "^7.0.0"
   }
 }

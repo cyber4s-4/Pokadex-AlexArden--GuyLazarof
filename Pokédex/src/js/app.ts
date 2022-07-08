@@ -66,41 +66,37 @@ searchButton.addEventListener("click", () => {
 let url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10";
 
 // Search by key down
-input.addEventListener("keydown", () => {
-
+input.addEventListener("keyup", () => {  
+ 
   // Fix container to contain one element
   container.style.width = "200px";
   container.style.position = "relative";
   container.style.left = "0";
   paginationDiv.style.display = "none";
+  homePageDiv2.style.display = 'none';
 
-  // let pokemonsList = getPokemonList(
-  //   "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151"
-  // );
-  fetch('http://localhost:3000/pokemons').then(data => data.json()).then(pokemons => 
-    pokemons.forEach((pokemon: any) => {
-      if(pokemon.name.includes(input.value)) {
-        container.innerHTML = "";
-        renderPokemon(pokemon); 
-      } else {
-        container.innerHTML = "";
-      }
-    })
-  )
+  let matchedPokemon: any = [];
+
+  console.log(input.value); 
+  console.log('bulb'); 
+  
+
+  pokemonList.forEach((pokemon: any) => {
+    if(input.value === ''){
+      input.value = ' ';  
+    } 
+  
+    if(pokemon.name.includes(input.value.toLowerCase())){ 
+      matchedPokemon.push(pokemon);  
+    } else {
+      container.innerHTML = '';
+    } 
+  });
+
+  matchedPokemon.forEach((pokemon: any) => {
+    renderPokemon(pokemon)
+  });
 }); 
-//   let foundPokemon = false;
-//   pokemonsList.then((value) => {
-//     value.results.forEach((item: { name: string; url: string }) => {
-//       if (item.name.includes(input.value.toLowerCase())) {
-//         container.innerHTML = "";
-//         renderPokemon(item.url);
-//         foundPokemon = true;
-//       } else {
-//         container.innerHTML = "";
-//       }
-//     });
-//   });
-// }); 
 
 // Render pokemon 
 async function renderPokemon(data: any) {
@@ -118,7 +114,6 @@ allPokemons.addEventListener("click", () => {
   // Fix container to contain three elements
   container.style.width = "600px";
     
-
   pokemonList.forEach((pokemon: Pokemon) => {
     renderPokemon(pokemon); 
   });
@@ -152,7 +147,7 @@ aboutButton.addEventListener("click", () => {
 
 // Pagination function
 function pagination(num: number) {
-  let pages: number = Math.ceil(num / 10);
+  let pages: number = Math.ceil(num / 9);
   for (let i = 0; i < pages; i++) { 
     let pageButton: HTMLButtonElement = document.createElement("button");
     pageButton.innerHTML = `${i + 1}`;
@@ -163,15 +158,17 @@ function pagination(num: number) {
       homePageDiv2.style.display = "none";
       // Fix container to contain three elements
       container.style.width = "600px";  
-     for(let i = 0; i < 9; i++){
-      renderPokemon(pokemonList[(Number(pageButton.innerHTML) - 1) * 9 + i])  
-     }
+     for(let j = 0; j < 9; j++){
+      if(pokemonList[ (i * 9) + j] !== undefined){
+        renderPokemon(pokemonList[ (i * 9) + j])   
+      }
+     } 
     })
     paginationDiv.appendChild(pageButton);
   }
 }
 
-pagination(162);
+pagination(151);   
 
 // Helper functions
 function showErrorMassage(container: HTMLDivElement, input: HTMLInputElement, massage: string) {
