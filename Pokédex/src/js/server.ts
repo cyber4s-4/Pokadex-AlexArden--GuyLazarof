@@ -1,25 +1,27 @@
 import { json } from 'body-parser';
-import express from 'express';
+import express, { Express } from 'express';
 import { Request, Response } from 'express';
+import cors from 'cors';
 const fs = require('fs');
 const path = require('path');
-const app = express();
+const app: Express = express();
 app.use(json());
+app.use(cors());
 
+const root: string = path.join(process.cwd(), 'dist');
 const pokemonList = JSON.parse(fs.readFileSync(__dirname + '/../data.json'));
 
-console.log(__dirname);
-
-app.use(express.static(__dirname + '/../'));
+app.use(express.static(root));
 
 app.get('/', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname + './../index.html'));
+  res.sendFile(path.join(root + 'index.html'));
 });
 
 app.get('/pokemons', (req: Request, res: Response) => {
   res.send(pokemonList);
 });
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
+const port = process.env.PORT || 4000;
+app.listen(port, () => {
+  console.log('Hosted: http://localhost:' + port);
 });
