@@ -137,7 +137,7 @@ aboutButton.addEventListener('click', () => {
 
 // Pagination function
 function pagination(num: number) {
-  const pages: number = Math.ceil(num / 9);
+  const pages: number = Math.ceil(num / 50);
   for (let i = 0; i < pages; i++) {
     const pageButton: HTMLButtonElement = document.createElement('button');
     pageButton.innerHTML = `${i + 1}`;
@@ -148,18 +148,18 @@ function pagination(num: number) {
       homePageDiv2.style.display = 'none';
       // Fix container to contain three elements
       container.style.width = '600px';
-      for (let j = 0; j < 9; j++) {
-        if (pokemonList[i * 9 + j] !== undefined) {
-          renderPokemon(pokemonList[i * 9 + j]);
+      for (let j = 0; j < 50; j++) {
+        if (pokemonList[i * 50 + j] !== undefined) {
+          renderPokemon(pokemonList[i * 50 + j]);
         }
       }
     });
-    paginationDiv.appendChild(pageButton);
+    paginationDiv.appendChild(pageButton); 
   }
 }
-
-pagination(151);
-
+ 
+pagination(800);  
+ 
 // Helper functions
 function showErrorMassage(
   container: HTMLDivElement,
