@@ -15,6 +15,7 @@
     "tsBuildInfoFile": "./dist/cache/tsc.json",
     "strict": true,
     "esModuleInterop": true,
+
     
 
   }

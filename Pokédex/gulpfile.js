@@ -30,13 +30,13 @@ gulp.task("index", () => {
 });
 
 // // Browser Sync
-// gulp.task("browser-sync", () => {
-//   browserSync.init({
-//     browser: "default",
-//     port: 4000,
-//     server: { baseDir: "./dist" },
-//   });
-// });
+gulp.task("browser-sync", () => {
+  browserSync.init({
+    browser: "default",
+    port: 4000,
+    server: { baseDir: "./dist" },
+  });
+});
 
 // Browser Sync live reload
 gulp.task("browser-sync-watch", () => {
@@ -82,8 +82,8 @@ gulp.task(
     "tsc",
     "build",
     gulp.parallel(
-      // "browser-sync",
-      // "browser-sync-watch",
+      "browser-sync",
+      "browser-sync-watch",
       "watch-scss",
       "watch-html",
       "watch-tsc",

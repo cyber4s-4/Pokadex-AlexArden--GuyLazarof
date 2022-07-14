@@ -7,8 +7,8 @@ const app = express();
 app.use(json());
 
 const pokemonList = JSON.parse(fs.readFileSync(__dirname + '/../data.json'));
-
-console.log(__dirname);
+  
+console.log(__dirname + '/../data.json');
 
 app.use(express.static(__dirname + '/../'));
 

@@ -9,14 +9,14 @@ export default class Pokemon {
   render(parent: HTMLDivElement, pokemonData: pokemon) {
     const pokemonDiv = document.createElement('div');
     pokemonDiv.classList.add('pokemon');
-    const type = pokemonData.types[0].type.name;
+    const type = pokemonData.types[0]; 
     const typeImg = `/img/${type}.png`;
     pokemonDiv.innerHTML = `
-     <img src="${pokemonData.sprites.front_default}">
+     <img src="${pokemonData.image}">   
      <div class="name">${pokemonData.name}</div>
      <div class="heigth">Height: ${pokemonData.height / 10} meter</div>
      <div class="weigth">Weigth: ${pokemonData.weight / 10} kg</div>
-     <div class="type"><img src="${typeImg}" />${type} </div>
+     <div class="type"><img src="${typeImg}" />${type}</div>
     `;
     parent.appendChild(pokemonDiv);
   }
@@ -27,11 +27,11 @@ export interface pokemon {
   height: number;
   weight: number;
   types: [type];
-  sprites: sprites;
+  image: string; 
 }
 
 export interface sprites {
-  front_default: string;
+  image: string;
 }
 
 export interface type {
