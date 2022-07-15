@@ -1,6 +1,6 @@
 [
   {
-    "name": "metapod",
+    "name": "metapod", 
     "weight": 99,
     "height": 7,
     "types": ["bug", null],
