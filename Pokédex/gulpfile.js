@@ -14,7 +14,7 @@ gulp.task("start", () => {
 
 // Creates js bundle from several js files
 gulp.task("build", () => {
-  return webpack(webpackConfig).pipe(gulp.dest("./dist"));
+  return webpack(webpackConfig).pipe(gulp.dest("./dist/client"));
 });
 
 // Converts scss to css
@@ -22,12 +22,28 @@ gulp.task("scss", () => {
   return gulp.src("./src/**/*.scss").pipe(sass()).pipe(gulp.dest("./dist"));
 });
 
-// Transfers files
-gulp.task("index", () => {
+// Transfers client files
+gulp.task("client", () => {
   return gulp
-    .src(["./src/*.html", "./src/favicon.ico", "./src/*/*", "./src/data.json"])
-    .pipe(gulp.dest("./dist"));
+    .src(["./src/client/*.html", "./src/client/favicon.ico"])
+    .pipe(gulp.dest("./dist/client"));
 });
+
+// Transfers client js files
+gulp.task("images", () => {
+  return gulp
+    .src(["./src/client/img/*"])
+    .pipe(gulp.dest("./dist/client/img")); 
+});
+
+// Transfers server files
+gulp.task("server", () => {
+  return gulp
+    .src(["./src/server/data.json"])
+    .pipe(gulp.dest("./dist/server")); 
+});
+
+
 
 // // Browser Sync
 gulp.task("browser-sync", () => {
@@ -47,12 +63,12 @@ gulp.task("browser-sync-watch", () => {
 
 // Watch scss files
 gulp.task("watch-scss", () => {
-  return gulp.watch("./src/*.scss", gulp.series("scss"));
+  return gulp.watch("./src/client/*.scss", gulp.series("scss"));
 });
 
 // Watch html files
 gulp.task("watch-html", () => {
-  return gulp.watch("./src/*.html", gulp.series("index"));
+  return gulp.watch("./src/client/*.html", gulp.series("client")); 
 });
 
 // Watch tsc files
@@ -78,12 +94,14 @@ gulp.task(
   gulp.series(
     "start",
     "scss",
-    "index",
-    "tsc",
+    "tsc", 
+    "client",
+    "images",
+    "server", 
     "build",
     gulp.parallel(
-      "browser-sync",
-      "browser-sync-watch",
+      // "browser-sync",
+      // "browser-sync-watch",
       "watch-scss",
       "watch-html",
       "watch-tsc",

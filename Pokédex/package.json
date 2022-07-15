@@ -1,5 +1,5 @@
 {
-  "name": "gulp_typescript",
+  "name": "gulp_typescript", 
   "scripts": {
     "start": "gulp",
     "lint": "eslint ./src --ext .ts",
@@ -21,6 +21,7 @@
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.1.0",
     "jest": "^28.1.0",
+    "mongod": "^2.0.0",
     "node-fetch": "^3.2.6",
     "sass": "^1.51.0",
     "source-map-loader": "^3.0.1",

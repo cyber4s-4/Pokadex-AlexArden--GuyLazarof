@@ -1,6 +1,6 @@
 module.exports = {
   mode: "development",
-  entry: "./dist/js/app.js",
+  entry: "./dist/client/js/app.js", 
   devtool: "source-map",
   output: {
     filename: "app.js",
