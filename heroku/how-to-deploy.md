@@ -54,3 +54,4 @@ git commit -m "My new commit"
 ```
 git push heroku master
 ```
+postgres://bjfrpifwleolyv:29a4e1823ca16c560831d9f5aa974594c578c4900216d89f2d1163f9db756ebb@ec2-34-235-31-124.compute-1.amazonaws.com:5432/d5fv2r42the16m
