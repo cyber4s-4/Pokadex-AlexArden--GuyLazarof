@@ -4,8 +4,14 @@ const rename = require("gulp-rename");
 const webpack = require("webpack-stream");
 const sass = require("gulp-sass")(require("sass"));
 const { exec } = require("child_process");
-
 const webpackConfig = require("./webpack.config.js");
+const log = require('fancy-log');
+
+// Start server
+gulp.task("server", (cb) => {
+  exec("node dist/tsc/server/server.js", () => cb()); 
+  log('Listening on localhost:3000');   
+});
 
 // Removes previous dist
 gulp.task("clean", () => {
@@ -86,7 +92,7 @@ gulp.task("express", () => {
 // Build all
 gulp.task(
   "build",
-  gulp.series("clean", "scss", "index", "data123", "img", "tsc", "bundle")
+  gulp.series("clean", "scss", "index", "data123", "img", "tsc", "bundle")  
 );
 
 // Heroku copy dist files
@@ -180,8 +186,8 @@ gulp.task(
 gulp.task(
   "dev",
   gulp.series(
-    "build",
-    gulp.parallel("watch-scss", "watch-html", "watch-tsc", "tsc-w")
+    "build", 
+    gulp.parallel("watch-scss", "watch-html", "watch-tsc", "tsc-w")   
   )
 );
 
@@ -190,6 +196,6 @@ gulp.task(
   "default",
   gulp.series(
     "build",
-    gulp.parallel("watch-scss", "watch-html", "watch-tsc", "tsc-w")
+    gulp.parallel("watch-scss", "watch-html", "watch-tsc", "tsc-w", "server")   
   )
 );
