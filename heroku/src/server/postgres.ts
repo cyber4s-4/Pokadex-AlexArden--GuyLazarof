@@ -1,12 +1,11 @@
 import dotenv from 'dotenv';
-import fs, { copyFileSync } from 'fs';
+import fs from 'fs';
 import { Client } from 'pg';
 import process from 'process';
-import { pokemon } from 'src/client/js/Pokemon';
 
 dotenv.config();
-const pokemonsData = JSON.parse(fs.readFileSync("./data.json").toString());
-console.log(process.env.DATABASE_URL);
+export const pokemonsData = JSON.parse(fs.readFileSync("./newdata.json").toString());
+
 export const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -14,24 +13,32 @@ export const client = new Client({
   },
 });
 
+export async function connect(){
+  await client.connect();
+}
+
+export async function deleteTable(){
+  await client.query("DROP TABLE IF EXISTS pokemons;");
+}
+
 // Create pokemons table
 export async function initPokemonTable() {
-  await client.connect();
-  // await client.query("DROP TABLE pokemons;");
   await client.query(
     `CREATE TABLE pokemons (
-    id INTEGER PRIMARY KEY,
-    name  TEXT,
-    weight INTEGER,
-    height INTEGER,
-    img TEXT,
-    types TEXT[]
-);`
+      id INTEGER PRIMARY KEY,
+      name  TEXT,
+      weight INTEGER,
+      height INTEGER,
+      img TEXT,
+      types TEXT[]
+    );`
   );
 }
 
+
+
 // Insert pokemons to DB
-async function updateDB(pokemonsArray: any[]) {
+export async function updateDB(pokemonsArray: any[]) {
   const generateSQLArr = (arr: string[]) => {
     const sqlString = arr.reduce((prev: string, curr: string) => {
       prev += `'${curr}',`;
@@ -51,9 +58,10 @@ async function updateDB(pokemonsArray: any[]) {
     const res = await client.query(sqlcmd);
   });
 }
-initPokemonTable();
+
+// connect();
+// deleteTable()
+// initPokemonTable();
 // updateDB(pokemonsData);
 
-/**
- *
- */
+

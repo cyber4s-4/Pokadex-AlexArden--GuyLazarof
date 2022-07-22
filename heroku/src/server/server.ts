@@ -1,11 +1,15 @@
 import { json } from 'body-parser';
-import { Request, Response } from 'express';
+import { Request, Response, urlencoded } from 'express';
 import express from 'express';
 import * as fs from 'fs';
 import path from 'path';
+import * as DB from './postgres';
+
+DB.client.connect();
 
 const app = express();
 app.use(json());
+app.use(express.urlencoded({extended: true}));
 
 const pokemonList = JSON.parse(
   fs.readFileSync(__dirname + "/data.json", "utf-8")
