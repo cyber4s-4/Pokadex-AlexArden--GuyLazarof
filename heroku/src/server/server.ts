@@ -11,10 +11,7 @@ const app = express();
 app.use(json());
 app.use(express.urlencoded({ extended: true }));
 
-
 // Data base functions
-
-
 
 app.use(express.static(__dirname + "/../client"));
 
