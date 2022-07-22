@@ -77,7 +77,7 @@ connect();
 
 
 
-// Show to Ofer, foreach didnot work for of did.
+// TODO: Show to Ofer, foreach didnot work for of did.
  // pokemonsArray.forEach(async (pokemon) => {
   //   const sqlcmd = `INSERT INTO pokemons (id, name, weight, height, img, types)
   //   VALUES (${pokemon.id}, '${pokemon.name}', ${pokemon.weight}, ${

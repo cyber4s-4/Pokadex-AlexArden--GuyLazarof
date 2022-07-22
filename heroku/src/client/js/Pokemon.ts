@@ -12,7 +12,7 @@ export default class Pokemon {
     const type = pokemonData.types[0]; 
     const typeImg = `/img/${type}.png`;
     pokemonDiv.innerHTML = `
-     <img src="${pokemonData.image}">   
+     <img src=${pokemonData.img}>    
      <div class="name">${pokemonData.name}</div>
      <div class="heigth">Height: ${pokemonData.height / 10} meter</div>
      <div class="weigth">Weigth: ${pokemonData.weight / 10} kg</div>
@@ -27,11 +27,11 @@ export interface pokemon {
   height: number;
   weight: number;
   types: [type];
-  image: string; 
+  img: string; 
 }
 
 export interface sprites {
-  image: string;
+  img: string;
 }
 
 export interface type {
