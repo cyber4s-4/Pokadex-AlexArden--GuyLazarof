@@ -2,9 +2,11 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import { Client } from 'pg';
 import process from 'process';
-
 dotenv.config();
+
 export const pokemonsData = JSON.parse(fs.readFileSync("./newdata.json").toString());
+
+
 
 export const client = new Client({
   connectionString: process.env.DATABASE_URL,
@@ -15,6 +17,11 @@ export const client = new Client({
 
 export async function connect(){
   await client.connect();
+}
+
+export async function getPokemons(limit:number, offset:number){
+  let result = await client.query(`SELECT * FROM pokemons LIMIT ${limit} OFFSET ${offset}`);
+  return result
 }
 
 export async function deleteTable(){
@@ -35,33 +42,48 @@ export async function initPokemonTable() {
   );
 }
 
-
-
 // Insert pokemons to DB
+const generateSQLArr = (arr: string[]) => {
+  const sqlString = arr.reduce((prev: string, curr: string) => {
+    prev += `'${curr}',`;
+    return prev;
+  }, "");
+  console.log(sqlString);
+
+  return `[${sqlString.slice(0, -1)}]`;
+};
 export async function updateDB(pokemonsArray: any[]) {
-  const generateSQLArr = (arr: string[]) => {
-    const sqlString = arr.reduce((prev: string, curr: string) => {
-      prev += `'${curr}',`;
-      return prev;
-    }, "");
-    console.log(sqlString);
 
-    return `[${sqlString.slice(0, -1)}]`;
-  };
+  for(let pokemon of pokemonsData){
 
-  pokemonsArray.forEach(async (pokemon) => {
-    const sqlcmd = `INSERT INTO pokemons (id, name, weight, height, img, types)
+    let sqlcmd = `INSERT INTO pokemons (id, name, weight, height, img, types)
     VALUES (${pokemon.id}, '${pokemon.name}', ${pokemon.weight}, ${
       pokemon.height
     }, '${pokemon.img}',ARRAY${generateSQLArr(pokemon.types)});`;
     console.log(sqlcmd);
-    const res = await client.query(sqlcmd);
-  });
+    await client.query(sqlcmd);
+  }
+
+ 
 }
 
-// connect();
+connect();
+
+// TODO: delete this.
 // deleteTable()
 // initPokemonTable();
 // updateDB(pokemonsData);
 
+
+
+
+// Show to Ofer, foreach didnot work for of did.
+ // pokemonsArray.forEach(async (pokemon) => {
+  //   const sqlcmd = `INSERT INTO pokemons (id, name, weight, height, img, types)
+  //   VALUES (${pokemon.id}, '${pokemon.name}', ${pokemon.weight}, ${
+  //     pokemon.height
+  //   }, '${pokemon.img}',ARRAY${generateSQLArr(pokemon.types)});`;
+  //   console.log(sqlcmd);
+  //   const res = await client.query(sqlcmd);
+  // });
 

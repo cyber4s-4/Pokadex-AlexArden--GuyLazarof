@@ -1,6 +1,5 @@
 import Pokemon from './Pokemon.js';
 
-console.log("test");
 const container = document.querySelector(".container") as HTMLDivElement;
 const input = document.querySelector(".input") as HTMLInputElement;
 const paginationDiv = document.querySelector(".pagination") as HTMLDivElement;
@@ -23,14 +22,15 @@ const searchButton = document.querySelector(
 ) as HTMLButtonElement;
 
 searchButton.addEventListener("click", () => {
+
   // Fix container to contain one element
   container.style.width = "200px";
   container.style.position = "relative";
   container.style.left = "0";
   paginationDiv.style.display = "none";
-  const pokemonsList = getPokemonList(
-    "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151"
-  );
+
+  const pokemonsList = getPokemonList("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=");
+
   let foundPokemon = false;
   pokemonsList.then((value) => {
     value.results.forEach((item: { name: string; url: string }) => {
