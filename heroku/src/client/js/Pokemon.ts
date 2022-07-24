@@ -7,9 +7,9 @@ export default class Pokemon {
     this.render(parent, pokemonData);
   }
   render(parent: HTMLDivElement, pokemonData: pokemon) {
-    const pokemonDiv = document.createElement('div');
-    pokemonDiv.classList.add('pokemon');
-    const type = pokemonData.types[0]; 
+    const pokemonDiv = document.createElement("div");
+    pokemonDiv.classList.add("pokemon");
+    const type = pokemonData.types[0];
     const typeImg = `/img/${type}.png`;
     pokemonDiv.innerHTML = `
      <img src=${pokemonData.img}>    
@@ -27,7 +27,7 @@ export interface pokemon {
   height: number;
   weight: number;
   types: [type];
-  img: string; 
+  img: string;
 }
 
 export interface sprites {

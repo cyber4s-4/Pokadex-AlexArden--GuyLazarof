@@ -4,10 +4,6 @@ import { Client } from 'pg';
 import process from 'process';
 dotenv.config();
 
-export const pokemonsData = JSON.parse(fs.readFileSync("./newdata.json").toString());
-
-
-
 export const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -52,30 +48,8 @@ const generateSQLArr = (arr: string[]) => {
 
   return `[${sqlString.slice(0, -1)}]`;
 };
-export async function updateDB(pokemonsArray: any[]) {
-
-  for(let pokemon of pokemonsData){
-
-    let sqlcmd = `INSERT INTO pokemons (id, name, weight, height, img, types)
-    VALUES (${pokemon.id}, '${pokemon.name}', ${pokemon.weight}, ${
-      pokemon.height
-    }, '${pokemon.img}',ARRAY${generateSQLArr(pokemon.types)});`;
-    console.log(sqlcmd);
-    await client.query(sqlcmd);
-  }
-
- 
-}
 
 connect();
-
-// TODO: delete this.
-// deleteTable()
-// initPokemonTable();
-// updateDB(pokemonsData);
-
-
-
 
 // TODO: Show to Ofer, foreach didnot work for of did.
  // pokemonsArray.forEach(async (pokemon) => {
